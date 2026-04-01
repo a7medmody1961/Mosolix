@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosolix POS - النظام المتكامل لإدارة عالمك الترفيهي</title>
+    <meta name="description" content="Mosolix POS هو نظام نقاط البيع المتكامل لإدارة محلات البلايستيشن والمراكز الترفيهية. تحكم كامل في الأجهزة، الكافيه، الموظفين، وتقارير أرباح ذكية.">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GSE1P2SVHH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-GSE1P2SVHH');
+    </script>
+
+    <meta property="og:title" content="Mosolix POS - النظام المتكامل لإدارة عالمك الترفيهي" />
+    <meta property="og:description" content="تحكم كامل في الأجهزة، الكافيه، الموظفين، وتقارير أرباح ذكية." />
+    <meta property="og:image" content="https://i.postimg.cc/pTpM2q8w/image.png" /> 
+    <meta property="og:url" content="https://mosolix.site/" />
+    <meta name="twitter:card" content="summary_large_image">
+
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/9Xs1zvNT/logo.png">
+	
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            /* Colors */
+            --dark-bg: #02040a;
+            --primary-blue: #00aaff;
+            --primary-purple: #a855f7; /* New Accent Color */
+            --glow-blue: rgba(0, 170, 255, 0.6);
+            --glow-purple: rgba(168, 85, 247, 0.6);
+            --card-bg: rgba(15, 23, 42, 0.6); /* Glassmorphism background */
+            --card-border: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(0, 170, 255, 0.5);
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dark: #02040a;
+            --success-green: #22c55e;
+            --danger-red: #ef4444;
+            
+            /* Typography */
+            --font-primary: 'Tajawal', sans-serif;
+            --font-headings: 'Orbitron', sans-serif;
+            
+            /* Sizing & Spacing */
+            --header-height: 70px;
+
+            /* Effects */
+            --transition-speed: 0.3s;
+            --transition-long: 0.5s;
+        }
+
+        /* --- BASE & RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(2, 4, 10, 0.85), rgba(2, 4, 10, 0.95)), url('https://i.postimg.cc/3NfsD9VN/background.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+        section { padding: 120px 0; position: relative; overflow: hidden; }
+
+        /* --- TYPOGRAPHY & HEADINGS --- */
+        h1, h2, h3, h4, .logo { font-family: var(--font-headings); color: var(--text-light); }
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.2;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: text-shine 8s linear infinite;
+            text-shadow: 0 0 15px var(--glow-blue), 0 0 25px var(--glow-purple);
+        }
+        @keyframes text-shine {
+            to { background-position: 200% center; }
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            text-align: center;
+            margin-bottom: 70px;
+            color: var(--text-light);
+            text-shadow: 0 0 10px var(--glow-blue);
+        }
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: -50px auto 70px;
+            font-size: 1.1rem;
+        }
+
+        /* --- SHINE ANIMATION --- */
+        @keyframes shine-animation {
+            0% { transform: translateX(-100%) skewX(-20deg); }
+            100% { transform: translateX(200%) skewX(-20deg); }
+        }
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%) skewX(-20deg);
+            animation: shine-animation 5s infinite 2s; /* Start after 2s */
+        }
+
+
+        /* --- CARD BASE STYLE (GLASSMORPHISM) --- */
+        .card-base {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed), border-color var(--transition-speed);
+        }
+        .card-base:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border-color: var(--border-hover);
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        .main-header {
+            background: rgba(10, 15, 31, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color var(--transition-speed);
+            height: var(--header-height);
+        }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 2rem; text-decoration: none; font-weight: 900; }
+        .logo span { color: var(--primary-blue); }
+        .main-nav { display: flex; align-items: center; gap: 30px; }
+        .main-nav a { color: var(--text-light); text-decoration: none; font-weight: 500; position: relative; padding: 5px 0; transition: color var(--transition-speed); }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+            transition: width var(--transition-speed) ease-out;
+        }
+        .main-nav a:hover, .main-nav a.active { color: var(--text-light); }
+        .main-nav a:hover::after, .main-nav a.active::after { width: 100%; right: auto; left: 0; }
+        
+        .menu-toggle { display: none; cursor: pointer; background: none; border: none; z-index: 1001; }
+        .menu-toggle i { font-size: 2rem; color: var(--text-light); transition: transform var(--transition-speed); }
+
+        /* --- HERO --- */
+        #hero {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; text-align: center;
+            padding-top: var(--header-height);
+        }
+        #hero .container { max-width: 900px; }
+        #hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin: 30px auto 0;
+            max-width: 700px;
+        }
+
+        /* --- BUTTONS --- */
+        .cta-button {
+            display: inline-flex;
+            align-items: center; justify-content: center;
+            gap: 15px;
+            background-image: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+            color: var(--text-dark);
+            padding: 16px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: var(--font-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 0 20px var(--glow-blue), 0 0 30px var(--glow-purple);
+        }
+        .cta-button i { font-size: 1.5em; }
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 0 30px var(--glow-blue), 0 0 50px var(--glow-purple);
+        }
+      
+        /* --- FEATURES SECTION --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { padding: 35px; text-align: center; }
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: -webkit-linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--glow-blue);
+        }
+        .feature-card h3 { color: var(--text-light); font-size: 1.4rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- WHY US SECTION --- */
+        #why-us { background: transparent; }
+        .why-us-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: stretch; }
+        .why-us-col { padding: 40px; }
+        .why-us-col h3 { font-size: 1.8rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;}
+        .why-us-col ul { list-style: none; }
+        .why-us-col li {
+            display: flex; align-items: flex-start;
+            gap: 15px; margin-bottom: 20px;
+            font-size: 1.1rem; color: var(--text-muted);
+        }
+        .why-us-col li i { font-size: 1.5rem; margin-top: 5px; }
+        .col-bad h3 { color: var(--danger-red); }
+        .col-bad .icon { color: var(--danger-red); }
+        .col-good h3 { color: var(--success-green); }
+        .col-good .icon { color: var(--success-green); }
+        .col-good li { color: var(--text-light); }
+        
+        /* --- GALLERY LIGHTBOX --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item {
+            border-radius: 10px; overflow: hidden;
+            cursor: pointer; position: relative;
+            border: 1px solid var(--card-border);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            background-color: #000;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 170, 255, 0.2);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gallery-item .overlay {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity var(--transition-speed);
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+        .gallery-item .overlay i { font-size: 3rem; color: white; }
+        
+        /* --- PRICING SECTION -- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; align-items: stretch; }
+        .price-card {
+            padding: 35px; text-align: center; display: flex; flex-direction: column;
+        }
+        .price-card.featured {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--glow-purple);
+            border-color: transparent;
+            position: relative;
+        }
+        /* Gradient Border for Featured Card */
+        .price-card.featured::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 15px; 
+            padding: 1px; 
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple)); 
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .price-card.featured:hover { transform: scale(1.1) translateY(-8px); }
+        .price-card h3 { font-size: 1.6rem; color: var(--text-light); }
+        .price-tag {
+            font-family: var(--font-headings);
+            font-size: 3rem; font-weight: 700;
+            margin: 15px 0;
+            color: var(--primary-blue);
+        }
+        .price-tag span { font-size: 1rem; color: var(--text-muted); font-family: var(--font-primary); }
+        .price-card ul { list-style: none; margin: 20px 0; flex-grow: 1; }
+        .price-card li { margin-bottom: 12px; color: var(--text-muted); }
+        .price-card li i { color: var(--success-green); margin-left: 8px; }
+        .price-card .cta-button { width: 100%; margin-top: auto; }
+        .price-card:not(.featured) .cta-button { 
+            background: transparent; color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            box-shadow: none;
+        }
+        .price-card:not(.featured) .cta-button:hover { 
+            background: var(--primary-blue); color: var(--text-dark);
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial-card {
+            padding: 30px;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '“';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 5rem;
+            font-family: serif;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+            z-index: -1;
+        }
+        .testimonial-card p {
+            font-style: italic; color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: 15px; }
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--card-border);
+        }
+        .testimonial-author h4 { margin: 0; color: var(--text-light); font-size: 1.1rem; }
+        .testimonial-author span { color: var(--text-muted); font-size: 0.9rem; }
+
+
+        /* --- FAQ SECTION --- */
+        .faq-container { max-width: 800px; margin: auto; }
+        .faq-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: background-color var(--transition-speed);
+        }
+        .faq-question {
+            width: 100%; text-align: right;
+            background: none; border: none;
+            color: var(--text-light); padding: 20px;
+            font-size: 1.2rem; font-weight: 500; font-family: var(--font-primary);
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-question i { transition: transform var(--transition-speed); color: var(--primary-blue); }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        }
+        .faq-answer p { padding: 0 20px 20px; color: var(--text-muted); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: transparent; text-align: center;
+            padding: 50px 0;
+            border-top: 1px solid var(--card-border);
+        }
+        .social-links a {
+            font-size: 2.5rem; color: var(--text-muted);
+            margin: 0 15px;
+            transition: all var(--transition-speed);
+            display: inline-block;
+        }
+        .social-links a:hover { transform: translateY(-5px) scale(1.1); }
+        .social-links a.whatsapp:hover { color: #25D366; }
+        .social-links a.messenger:hover { color: #00B2FF; }
+
+        .copyright { margin-top: 30px; color: var(--text-muted); font-size: 0.9rem; }
+        .copyright .dev-name { color: var(--primary-blue); font-weight: bold; }
+
+        /* --- UTILITY CLASSES --- */
+        .back-to-top {
+            position: fixed; bottom: 20px; left: 20px;
+            width: 50px; height: 50px;
+            background-color: var(--primary-blue);
+            color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; text-decoration: none;
+            z-index: 999;
+            opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition-speed);
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--glow-blue); }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            text-decoration: none;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all var(--transition-speed);
+        }
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* LIGHTBOX STYLES (with navigation) */
+        .lightbox {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed), visibility var(--transition-speed);
+        }
+        .lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+        .lightbox-close, .lightbox-prev, .lightbox-next {
+            position: absolute;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: background-color var(--transition-speed);
+            z-index: 2001;
+        }
+        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        .lightbox-close {
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+        }
+        .lightbox-prev, .lightbox-next {
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .lightbox-prev { left: 10px; }
+        .lightbox-next { right: 10px; }
+
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .why-us-grid { grid-template-columns: 1fr; }
+            .price-card.featured { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                position: fixed; top: 0; right: -100%;
+                width: 70%; height: 100vh;
+                background: var(--dark-bg);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 25px;
+                transition: right var(--transition-long) cubic-bezier(0.7, 0, 0.3, 1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                z-index: 1000;
+            }
+            .main-nav.active { right: 0; }
+            .main-nav a { font-size: 1.2rem; }
+            .menu-toggle { display: block; z-index: 1001; }
+            .menu-toggle.active i { transform: rotate(90deg); }
+
+            .floating-whatsapp { width: 50px; height: 50px; font-size: 1.8rem; }
+            .back-to-top { bottom: 80px; }
+        }
+    </style>
+	<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1280825130051847');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1280825130051847&ev=PageView&noscript=1"
+/></noscript>
+</head>
+<body>
+
+    <header class="main-header" id="main-header">
+        <div class="container">
+            <a href="#" class="logo">Mosolix<span>POS</span></a>
+            <nav class="main-nav" id="main-nav">
+                <a href="#features">المميزات</a>
+                <a href="#why-us">لماذا نحن؟</a>
+                <a href="#gallery">جولة في البرنامج</a>
+                <a href="#pricing">الأسعار</a>
+                <a href="#testimonials">آراء العملاء</a>
+                <a href="#faq">أسئلة شائعة</a>
+                <a href="#download">التحميل</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container reveal">
+                <h1>تحكم كامل يعني أرباح أكثر</h1>
+                <p class="subtitle">
+                    Mosolix POS ليس مجرد برنامج، بل شريكك في إدارة مكانك. نحوّل الفوضى إلى نظام، والتخمين إلى أرقام، والوقت الضائع إلى أرباح حقيقية.
+                </p>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2 class="reveal">سيستم مُصمم لنجاحك</h2>
+                <div class="features-grid">
+                    <div class="feature-card card-base reveal" style="transition-delay: 0.1s;">
+                        <i class="bi bi-infinity icon"></i>
+                        <h3>عدد أجهزة مفتوح</h3>
+                        <p>عندك جهازين أو خمسين، السيستم ينمو معك بدون أي حدود.</p>
+                    </div>
+                    <div class="feature-card card-base reveal" style="transition-delay: 0.2s;">
+                        <i class="bi bi-cup-hot-fill icon"></i>
+                        <h3>كافيه ونقطة بيع</h3>
+                        <p>نظّم مخزونك بسهولة، وأضف طلبات الكافيه على حساب الجلسة، مع تنبيهات عند قرب نفاذ المنتجات.</p>
+                    </div>
+                    <div class="feature-card card-base reveal" style="transition-delay: 0.3s;">
+                        <i class="bi bi-bar-chart-line-fill icon"></i>
+                        <h3>تقارير ذكية</h3>
+                        <p>اعرف إجمالي دخلك، صافي ربحك، أكثر الأجهزة ربحية، والمنتجات الأكثر مبيعًا.</p>
+                    </div>
+                     <div class="feature-card card-base reveal" style="transition-delay: 0.4s;">
+                        <i class="bi bi-people-fill icon"></i>
+                        <h3>إدارة الموظفين</h3>
+                        <p>نظام صلاحيات كامل (Admin, Moderator) للتحكم فيمن يمكنه عرض وتعديل البيانات الهامة.</p>
+                    </div>
+                    <div class="feature-card card-base reveal" style="transition-delay: 0.5s;">
+                        <i class="bi bi-shield-check icon"></i>
+                        <h3>أمان تام لبياناتك</h3>
+                        <p>حماية بالرخصة لضمان عدم استخدامه من غيرك، مع خاصية النسخ الاحتياطي للحفاظ على بياناتك.</p>
+                    </div>
+                    <div class="feature-card card-base reveal" style="transition-delay: 0.6s;">
+                        <i class="bi bi-gem icon"></i>
+                        <h3>تحديثات ودعم فني</h3>
+                        <p>تحديثات مستمرة بناءً على اقتراحاتكم، مع دعم فني متكامل لضمان عدم توقف عملك.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="why-us">
+            <div class="container">
+                <h2 class="reveal">توقف عن إدارة عملك بالطريقة الصعبة</h2>
+                <div class="why-us-grid">
+                    <div class="why-us-col card-base col-bad reveal" style="transition-delay: 0.2s;">
+                        <h3><i class="bi bi-x-circle-fill"></i>الطريقة القديمة</h3>
+                        <ul>
+                            <li><i class="bi bi-caret-left-fill icon"></i> حسابات يدوية وفوضى في الأرقام.</li>
+                            <li><i class="bi bi-caret-left-fill icon"></i> عدم معرفة دقيقة بالأرباح والمصاريف.</li>
+                            <li><i class="bi bi-caret-left-fill icon"></i> صعوبة متابعة أداء الموظفين.</li>
+                            <li><i class="bi bi-caret-left-fill icon"></i> إهدار الوقت في مهام روتينية مملة.</li>
+                             <li><i class="bi bi-caret-left-fill icon"></i> خطر ضياع البيانات الورقية.</li>
+                        </ul>
+                    </div>
+                    <div class="why-us-col card-base col-good reveal" style="transition-delay: 0.4s;">
+                        <h3><i class="bi bi-check-circle-fill"></i>بطريقة Mosolix</h3>
+                        <ul>
+                            <li><i class="bi bi-caret-left-fill icon"></i> نظام آلي دقيق لكل الحسابات.</li>
+                            <li><i class="bi bi-caret-left-fill icon"></i> تقارير لحظية بالأرباح والمبيعات.</li>
+                            <li><i class="bi bi-caret-left-fill icon"></i> متابعة أداء كل موظف بصلاحيات محددة.</li>
+                            <li><i class="bi bi-caret-left-fill icon"></i> ركّز على عملائك واترك الباقي علينا.</li>
+                             <li><i class="bi bi-caret-left-fill icon"></i> أمان ونسخ احتياطي لجميع بياناتك.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <h2 class="reveal">نظرة سريعة داخل البرنامج</h2>
+                <div class="gallery-grid">
+                    <figure class="gallery-item reveal" data-src="https://i.postimg.cc/pTpM2q8w/image.png" style="transition-delay: 0.1s;">
+                        <img src="https://i.postimg.cc/pTpM2q8w/image.png" alt="شاشة Mosolix POS الرئيسية تعرض حالة الأجهزة المتاحة والمشغولة" loading="lazy">
+                        <div class="overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+                    </figure>
+                    <figure class="gallery-item reveal" data-src="https://i.postimg.cc/1RjbKG6t/image.png" style="transition-delay: 0.2s;">
+                        <img src="https://i.postimg.cc/1RjbKG6t/image.png" alt="شاشة عرض الفاتورة النهائية للعميل في برنامج Mosolix POS" loading="lazy">
+                        <div class="overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+                    </figure>
+                    <figure class="gallery-item reveal" data-src="https://i.postimg.cc/L5WdYfkJ/image.png" style="transition-delay: 0.3s;">
+                        <img src="https://i.postimg.cc/L5WdYfkJ/image.png" alt="شاشة التحليلات والتقارير الذكية في Mosolix POS" loading="lazy">
+                        <div class="overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+                    </figure>
+                    <figure class="gallery-item reveal" data-src="https://i.postimg.cc/FzStSzTG/image.png" style="transition-delay: 0.4s;">
+                        <img src="https://i.postimg.cc/FzStSzTG/image.png" alt="شاشة ملخص الشيفت للموظف في Mosolix POS" loading="lazy">
+                        <div class="overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+                    </figure>
+                    <figure class="gallery-item reveal" data-src="https://i.postimg.cc/0QNHYjyD/image.png" style="transition-delay: 0.5s;">
+                        <img src="https://i.postimg.cc/0QNHYjyD/image.png" alt="شاشة معلومات تفعيل الرخصة والنسخ الاحتياطي للبيانات" loading="lazy">
+                        <div class="overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+                    </figure>
+                     <figure class="gallery-item reveal" data-src="https://i.postimg.cc/9fxj5v4P/image.png" style="transition-delay: 0.6s;">
+                        <img src="https://i.postimg.cc/9fxj5v4P/image.png" alt="شاشة تسجيل الدخول الآمنة للموظفين في Mosolix POS" loading="lazy">
+                        <div class="overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pricing">
+            <div class="container">
+                <h2 class="reveal">أسعار مرنة تناسب الجميع</h2>
+                <p class="section-subtitle reveal">اختر الخطة التي تناسب حجم عملك وميزانيتك. جميع الخطط تشمل كافة المميزات والدعم الفني.</p>
+                <div class="pricing-grid">
+                    <div class="price-card card-base reveal" style="transition-delay: 0.2s;">
+                        <h3>الباقة الشهرية</h3>
+                        <div class="price-tag">399 <span>ج.م/ شهريًا</span></div>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i> جميع مميزات البرنامج</li>
+                            <li><i class="bi bi-check-circle-fill"></i> دعم فني عبر واتساب</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تحديثات مستمرة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> عدد أجهزة لا محدود</li>
+                        </ul>
+                        <a href="https://wa.me/201110210770" target="_blank" class="cta-button">اختر الباقة</a>
+                    </div>
+                     <div class="price-card card-base featured reveal" style="transition-delay: 0.4s;">
+                        <h3>باقة الـ 6 أشهر</h3>
+                        <div class="price-tag">1999 <span>ج.م/ كل 6 أشهر</span></div>
+                         <ul>
+                            <li><i class="bi bi-check-circle-fill"></i> <strong>توفير شهر كامل</strong></li>
+                            <li><i class="bi bi-check-circle-fill"></i> جميع مميزات البرنامج</li>
+                            <li><i class="bi bi-check-circle-fill"></i> دعم فني مميز</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تحديثات مستمرة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> عدد أجهزة لا محدود</li>
+                        </ul>
+                        <a href="https://wa.me/201110210770" target="_blank" class="cta-button shine-effect">الباقة الأكثر شيوعًا</a>
+                    </div>
+                     <div class="price-card card-base reveal" style="transition-delay: 0.6s;">
+                        <h3>الباقة السنوية</h3>
+                        <div class="price-tag">3599 <span>ج.م/ سنويًا</span></div>
+                         <ul>
+                            <li><i class="bi bi-check-circle-fill"></i> <strong>توفير 3 أشهر</strong></li>
+                            <li><i class="bi bi-check-circle-fill"></i> جميع مميزات البرنامج</li>
+                            <li><i class="bi bi-check-circle-fill"></i> دعم فني بأولوية قصوى</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تحديثات مستمرة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> عدد أجهزة لا محدود</li>
+                        </ul>
+                        <a href="https://wa.me/201110210770" target="_blank" class="cta-button">اختر الباقة</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <div class="container">
+                <h2 class="reveal">ماذا يقول عملاؤنا؟</h2>
+                 <div class="testimonials-grid">
+                    <div class="testimonial-card card-base reveal" style="transition-delay: 0.2s;">
+                        <p>"بصراحة البرنامج ده نقلة. كنت شغال بالدفاتر والآلة الحاسبة والدنيا كانت هيصة، دلوقتي كل حاجة قدامي على الشاشة بضغطة زرار. الأرباح زادت لأني بقيت عارف إيه اللي بيكسبني وإيه اللي لأ."</p>
+                        <div class="testimonial-author">
+                            <img src="https://i.postimg.cc/7LZxdv2Z/4042171.png" alt="صورة العميل محمد السيد" class="testimonial-avatar">
+                            <div>
+                                <h4>محمد السيد</h4>
+                                <span>صاحب محل بلايستيشن</span>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="testimonial-card card-base reveal" style="transition-delay: 0.4s;">
+                        <p>"أحسن حاجة بالنسبالي هي ربط الكافيه بالأجهزة. مبقاش فيه لخبطة في حساب المشروبات، والزبون مرتاح عشان كله في فاتورة واحدة في الآخر. وشكراً ليكم على الدعم السريع أي وقت."</p>
+                        <div class="testimonial-author">
+                           <img src="https://i.postimg.cc/7LZxdv2Z/4042171.png" alt="صورة العميل علي حسن" class="testimonial-avatar">
+                           <div>
+                                <h4>علي حسن</h4>
+                                <span>صاحب محل بلايستيشن</span>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="testimonial-card card-base reveal" style="transition-delay: 0.6s;">
+                        <p>"كنت خايف من البرامج وبحسها صعبة، بس Mosolix POS طلع سهل جدًا. الموظفين اللي عندي اتعلموا عليه في يوم. والتقارير بتاعته ممتازة، بتعرفني كل كبيرة وصغيرة في المحل."</p>
+                        <div class="testimonial-author">
+                            <img src="https://i.postimg.cc/7LZxdv2Z/4042171.png" alt="صورة العميل يوسف محمود" class="testimonial-avatar">
+                           <div>
+                                <h4>يوسف محمود</h4>
+                                <span>صاحب محل بلايستيشن</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <h2 class="reveal">أسئلة شائعة</h2>
+                <div class="faq-container reveal">
+                    <div class="faq-item">
+                        <button class="faq-question">هل يعمل البرنامج بدون إنترنت؟<i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>نعم بالطبع، البرنامج يعمل 100% بدون الحاجة للاتصال بالإنترنت (Offline). كل بياناتك يتم حفظها على جهازك لضمان أقصى سرعة وأمان.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">هل هناك تحديثات للبرنامج؟ وماذا عن الدعم الفني؟<i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>بالتأكيد. نعمل باستمرار على تطوير البرنامج وإضافة مزايا جديدة بناءً على اقتراحات عملائنا. جميع التحديثات تكون مجانية ومتاحة للمشتركين، بالإضافة إلى دعم فني متكامل عبر واتساب وماسنجر لمساعدتك في أي استفسار أو مشكلة قد تواجهك.</p>
+                        </div>
+                    </div>
+                     <div class="faq-item">
+                        <button class="faq-question">ماذا يحدث عند انتهاء مدة الاشتراك؟<i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>نطمئنك تمامًا، بياناتك تظل محفوظة على جهازك بأمان. عند انتهاء اشتراكك، سيتوقف البرنامج عن قبول عمليات جديدة فقط، ولكن يمكنك في أي وقت تجديد الاشتراك بنفس الرخصة لاستكمال العمل من حيث توقفت وبدون فقدان أي بيانات.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">هل يمكنني تجربة البرنامج أولاً؟<i class="bi bi-chevron-down"></i></button>
+                        <div class="faq-answer">
+                            <p>أكيد. نوفر نسخة تجريبية كاملة الميزات يمكنك تحميلها وتجربتها بنفسك لترى كيف يمكن لـ Mosolix POS تطوير عملك. نحن واثقون أنه سينال إعجابك.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download">
+            <div class="container" style="text-align: center;">
+                <h2 class="reveal">هل أنت جاهز لتطوير عملك؟</h2>
+                <p class="section-subtitle reveal" style="margin: 0 auto 40px;">
+                    توقف عن إهدار الوقت والمال. حمّل نسختك من Mosolix POS الآن وابدأ رحلتك نحو الدقة، التحكم، والمزيد من الأرباح.
+                </p>
+                <div class="reveal" style="transition-delay: 0.4s;">
+                    <a href="https://www.dropbox.com/scl/fi/hprwfai3fzwvirpq6oblo/Mosolix_POS_Setup_v1.0.exe?rlkey=h0j9k0plcgqmonx4576zrd5lc&st=z7cssemz&dl=1" class="cta-button shine-effect" target="_blank">
+                        <i class="bi bi-cloud-download-fill"></i>
+                        <span>حمّل البرنامج من هنا</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://wa.me/201110210770" target="_blank" title="واتساب" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://m.me/A7medMody196" target="_blank" title="ماسنجر" class="messenger"><i class="bi bi-messenger"></i></a>
+            </div>
+            <p class="copyright">
+                تصميم وتطوير: <span class="dev-name">Ahmed Badawy</span>
+            </p>
+            <p class="copyright" style="margin-top: 15px; font-size: 0.8rem;">
+                &copy; <span id="copyright-year">2025</span> Mosolix Systems. جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Go to top"><i class="bi bi-arrow-up"></i></a>
+    <a href="https://wa.me/201110210770" target="_blank" class="floating-whatsapp" aria-label="تواصل معنا عبر واتساب">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Close image view">&times;</button>
+            <button class="lightbox-prev" id="lightbox-prev" aria-label="الصورة السابقة">&#10094;</button>
+            <img src="" alt="صورة مكبرة من البرنامج" id="lightbox-img">
+            <button class="lightbox-next" id="lightbox-next" aria-label="الصورة التالية">&#10095;</button>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.getElementById('main-header');
+        const mainNav = document.getElementById('main-nav');
+        const menuToggle = document.getElementById('menu-toggle');
+        const backToTopBtn = document.getElementById('back-to-top');
+        const navLinks = document.querySelectorAll('#main-nav a');
+        const sections = document.querySelectorAll('main section');
+
+        // --- On-scroll reveal animation ---
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => { revealObserver.observe(el); });
+
+        // --- Mobile Navigation ---
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.toggle('bi-list');
+                icon.classList.toggle('bi-x');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.add('bi-list');
+                        icon.classList.remove('bi-x');
+                    }
+                });
+            });
+        }
+        
+        // --- Active Nav Link on Scroll & Back to Top Button ---
+        const onScroll = () => {
+            let currentSection = '';
+            const headerHeight = header.offsetHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerHeight - 50;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        };
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // Run on load
+        
+        // --- Lightbox Gallery (with navigation) ---
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox) {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            let currentIndex = 0;
+
+            const showLightbox = (index) => {
+                const item = galleryItems[index];
+                const imgSrc = item.getAttribute('data-src');
+                if (imgSrc) {
+                    lightboxImg.setAttribute('src', imgSrc);
+                    lightbox.classList.add('show');
+                    currentIndex = index;
+                }
+            };
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showLightbox(index);
+                });
+            });
+
+            const closeLightbox = () => lightbox.classList.remove('show');
+            const showNext = () => {
+                const nextIndex = (currentIndex + 1) % galleryItems.length;
+                showLightbox(nextIndex);
+            };
+            const showPrev = () => {
+                const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                showLightbox(prevIndex);
+            };
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxNext.addEventListener('click', showNext);
+            lightboxPrev.addEventListener('click', showPrev);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if(lightbox.classList.contains('show')) {
+                    if (e.key === "Escape") closeLightbox();
+                    if (e.key === "ArrowRight") showNext();
+                    if (e.key === "ArrowLeft") showPrev();
+                }
+            });
+        }
+        
+        // --- FAQ Accordion ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const answer = item.querySelector('.faq-answer');
+                const wasActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(i => {
+                    if (i.classList.contains('active')) {
+                        i.classList.remove('active');
+                        i.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+
+                // Open the clicked item if it wasn't active
+                if (!wasActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+
+        // --- Dynamic Copyright Year ---
+        const copyrightYearSpan = document.getElementById('copyright-year');
+        if(copyrightYearSpan) {
+            copyrightYearSpan.textContent = new Date().getFullYear();
+        }
+
+    });
+    </script>
+
+</body>
+</html>
